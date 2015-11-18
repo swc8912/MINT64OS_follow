@@ -97,7 +97,7 @@ READDATA:
 
 	; 마지막 섹터까지 읽었으면(섹터 번호가 19이면) 헤드를 토글(0->1, 1->0)하고 섹터 번호를 1로 설정
 	xor byte[HEADNUMBER], 0x01	; 헤드번호를 0x01과 xor하여 토글
-	xor byte[SECTORNUMBER], 0x01	; 섹터번호를 1로 설정
+	mov byte[SECTORNUMBER], 0x01	; 섹터번호를 1로 설정
 
 	; 만약 헤드가 1->0으로 바뀌었으면 양쪽 헤드를 모두 읽은 것이므로 아래로 이동하여 트랙 번호를 1증가
 	cmp byte[HEADNUMBER], 0x00
