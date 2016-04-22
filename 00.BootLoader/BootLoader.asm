@@ -6,7 +6,7 @@ SECTION .text	; text 섹션(세그먼트)을 정의
 jmp 0x07C0:START	; CS세그먼트 레지스터에 0x07C0을 복사하면서 START 레이블로 이동
 
 ; OS 관련된 환경 설정 값
-TOTALSECTORCOUNT:	dw 1	; 부트 로더를 제외한 OS 이미지의 크기, 최대 1152 섹터(0x90000byte)까지 가능
+TOTALSECTORCOUNT:	dw 0x02		; 부트 로더를 제외한 OS 이미지의 크기, 최대 1152 섹터(0x90000byte)까지 가능
 
 ; 코드 영역
 START:
