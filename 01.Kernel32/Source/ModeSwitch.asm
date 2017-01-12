@@ -22,7 +22,7 @@ kReadCPUID:
 
 	; 반환된 값을 파라미터에 저장
 	; *pdwEAX
-	mov esi, dword [epb + 12]	; 파라미터 2(pdwEAX)를 ESI레지스터에 저장
+	mov esi, dword [ebp + 12]	; 파라미터 2(pdwEAX)를 ESI레지스터에 저장
 	mov dword [esi], eax		; pdwEAX가 포인터이므로 포인터가 가리키는 어드레스에 EAX레지스터의 값을 저장
 
 	; *pdwEBX
