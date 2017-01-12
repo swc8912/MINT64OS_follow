@@ -26,15 +26,15 @@ kReadCPUID:
 	mov dword [esi], eax		; pdwEAX가 포인터이므로 포인터가 가리키는 어드레스에 EAX레지스터의 값을 저장
 
 	; *pdwEBX
-	mov esi, dword [ebp + 16]	; 파라미터 2(pdwEBX)를 ESI레지스터에 저장
+	mov esi, dword [ebp + 16]	; 파라미터 3(pdwEBX)를 ESI레지스터에 저장
 	mov dword [esi], ebx		; pdwEBX가 포인터이므로 포인터가 가리키는 어드레스에 EBX레지스터의 값을 저장
 
 	; *pdwECX
-	mov esi, dword [ebp + 20]	; 파라미터 2(pdwECX)를 ESI레지스터에 저장
+	mov esi, dword [ebp + 20]	; 파라미터 4(pdwECX)를 ESI레지스터에 저장
 	mov dword [esi], ecx		; pdwECX가 포인터이므로 포인터가 가리키는 어드레스에 ECX레지스터의 값을 저장
 
 	; *pdwEDX
-	mov esi, dword [ebp + 24]	; 파라미터 2(pdwEDX)를 ESI레지스터에 저장
+	mov esi, dword [ebp + 24]	; 파라미터 5(pdwEDX)를 ESI레지스터에 저장
 	mov dword [esi], edx		; pdwEDX가 포인터이므로 포인터가 가리키는 어드레스에 EDX레지스터의 값을 저장
 
 	pop esi		; 함수에서 사용이 끝난 ESI레지스터부터 EBP레지스터까지를 스택에
