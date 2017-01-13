@@ -35,24 +35,24 @@ Kernel64:
 
 Disk.img: 00.BootLoader/BootLoader.bin 01.Kernel32/Kernel32.bin 02.Kernel64/Kernel64.bin
 	@echo
-	@echo ==================== Disk Image Build Start ====================
+	@echo ==================== Disk Image Build Start ===================
 	@echo
 
 	./ImageMaker.exe $^
 
 	@echo
-	@echo ==================== All Build Complete ========================
+	@echo ==================== All Build Complete =======================
 	@echo
 
 Utility:
 	@echo
-	@echo ==================== Utility Build Start =======================
+	@echo ==================== Utility Build Start ======================
 	@echo
 	
 	make -C 04.Utility
 	
 	@echo
-	@echo ==================== Utility Build Complete ====================
+	@echo ==================== Utility Build Complete ===================
 	@echo
 	
 clean:
