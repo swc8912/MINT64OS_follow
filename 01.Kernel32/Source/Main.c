@@ -43,7 +43,7 @@ void Main(void)
 	kPrintString(45, 6, "Pass");
 
 	// 프로세서 제조사 정보 읽기
-	kReadCPUID(0x00, &dwEAX, &dwEBX, &dwECX,&dwEDX);
+	kReadCPUID(0x00, &dwEAX, &dwEBX, &dwECX, &dwEDX);
 	*(DWORD*)vcVendorString = dwEBX;
 	*((DWORD*)vcVendorString + 1) = dwEDX;
 	*((DWORD*)vcVendorString + 2) = dwECX;
@@ -51,7 +51,7 @@ void Main(void)
 	kPrintString(45, 7, vcVendorString);
 
 	// 64비트 지원 유무 확인
-	kReadCPUID(0x80000001, &dwEAX, &dwEBX, &dwECX,&dwEDX);
+	kReadCPUID(0x80000001, &dwEAX, &dwEBX, &dwECX, &dwEDX);
 	kPrintString(0, 8, "64bit Mode Support Check....................[    ]");
 
 	if(dwEDX & (1 << 29))
