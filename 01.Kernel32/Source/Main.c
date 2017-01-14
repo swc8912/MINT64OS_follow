@@ -160,7 +160,7 @@ void kCopyKernel64ImageTo2Mbyte(void)
 	pdwDestinationAddress = (DWORD*)0x200000;
 
 	// IA-32e 모드 커널 섹터 크기만큼 복사
-	for(i = 0; i<512 * (wTotalKernelSectorCount -  wKernel32SectorCount) / 4; i++)
+	for(i = 0; i<512 * (wTotalKernelSectorCount - wKernel32SectorCount) / 4; i++)
 	{
 		*pdwDestinationAddress = *pdwSourceAddress;
 		pdwDestinationAddress++;
