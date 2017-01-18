@@ -209,7 +209,7 @@ int kIToA(long lValue, char* pcBuffer, int iRadix)
 		break;
 	case 10:
 	default:
-		iReturn  = kDecimalToString(lValue, pcBuffer);
+		iReturn = kDecimalToString(lValue, pcBuffer);
 		break;
 	}
 	return iReturn;
@@ -232,7 +232,7 @@ int kHexToString(QWORD qwValue, char* pcBuffer)
 	// 버퍼에 1의 자리부터  16, 256, ...의 자리 순서로 숫자 삽입
 	for(i = 0; qwValue > 0; i++)
 	{
-		qwCurrentValue = qwCurrentValue % 16;
+		qwCurrentValue = qwValue % 16;
 		if(qwCurrentValue >= 10)
 		{
 			pcBuffer[i] = 'A' +  (qwCurrentValue - 10);
@@ -277,7 +277,7 @@ int kDecimalToString(long lValue, char* pcBuffer)
 	}
 
 	// 버퍼에 1의 자리부터  10, 100, 1000 ...의 자리 순서로 숫자 삽입
-	for(i = 0; lValue > 0; i++)
+	for(; lValue > 0; i++)
 	{
 		pcBuffer[i] = '0' + lValue %  10;
 		lValue = lValue /  10;
@@ -355,7 +355,7 @@ int kVSPrintf(char* pcBuffer, const char* pcFormatString, va_list ap)
 				pcCopyString = (char*)(va_arg(ap, char*));
 				iCopyLength = kStrLen(pcCopyString);
 				// 문자열의 길이만큼을 출력 버퍼로 복사하고 출력한 길이만큼 버퍼의 인덱스 이동
-				kMemCpy(pcBuffer + iBufferIndex, pcCopyString,  iCopyLength);
+				kMemCpy(pcBuffer + iBufferIndex, pcCopyString, iCopyLength);
 				iBufferIndex += iCopyLength;
 				break;
 				// 문자 출력
