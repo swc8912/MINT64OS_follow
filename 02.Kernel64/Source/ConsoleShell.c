@@ -9,7 +9,7 @@ SHELLCOMMANDENTRY gs_vstCommandTable[] =
 		{ "help", "Show Help", kHelp },
 		{ "cls", "Clear Screen", kCls },
 		{ "totalram", "Show Total RAM Size", kShowTotalRAMSize },
-		{ "strtod", "String To Decil/Hex Convert", kStringToDecimalHexTest },
+		{ "strtod", "String To Decial/Hex Convert", kStringToDecimalHexTest },
 		{ "shutdown", "Shutdown And Reboot OS", kShutdown }
 };
 
@@ -60,7 +60,7 @@ void kStartConsoleShell(void)
 			iCommandBufferIndex = 0;
 		}
 		// Shift 키, CapsLock, NumLock, ScrollLock 은 무시
-		else if((bKey = KEY_LSHIFT) || (bKey = KEY_RSHIFT) || (bKey = KEY_CAPSLOCK) || (bKey = KEY_NUMLOCK) || (bKey = KEY_SCROLLLOCK))
+		else if((bKey == KEY_LSHIFT) || (bKey == KEY_RSHIFT) || (bKey == KEY_CAPSLOCK) || (bKey == KEY_NUMLOCK) || (bKey == KEY_SCROLLLOCK))
 		{
 			;
 		}

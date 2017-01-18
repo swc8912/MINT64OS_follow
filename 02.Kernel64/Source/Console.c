@@ -3,7 +3,7 @@
 #include "Keyboard.h"
 
 // 콘솔의 정보를 관리하는 자료구조
-CONSOLEMANAGER  gs_stConsoleManager = { 0, };
+CONSOLEMANAGER gs_stConsoleManager = { 0, };
 
 // 콘솔 초기화
 void kInitializeConsole(int iX, int iY)
@@ -84,7 +84,7 @@ int kConsolePrintString(const char* pcBuffer)
 		{
 			// 출력할 위치를 80배수 컬럼으로 옮김
 			// 현재 라인 남은 문자열 수만큼 더해서 다음 라인으로 위치시킴
-			iPrintOffset += (CONSOLE_WIDTH - (iPrintOffset  % CONSOLE_WIDTH));
+			iPrintOffset += (CONSOLE_WIDTH - (iPrintOffset % CONSOLE_WIDTH));
 		}
 		// 탭 처리
 		else if(pcBuffer[i] == '\t')
