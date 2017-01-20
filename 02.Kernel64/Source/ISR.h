@@ -1,10 +1,3 @@
-/*
- * ISR.h
- *
- *  Created on: 2017. 1. 16.
- *      Author: ChaosControl
- */
-
 #ifndef __ISR_H__
 #define __ISR_H__
 
