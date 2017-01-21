@@ -6,7 +6,7 @@ SECTION .text
 global kInPortByte, kOutPortByte, kLoadGDTR, kLoadTR, kLoadIDTR
 global kEnableInterrupt, kDisableInterrupt, kReadRFLAGS
 global kReadTSC
-global kSwitchContext
+global kSwitchContext, kHlt
 
 ; 포트로부터 1바이트를 읽음
 ; PARAM: 포트 번호
@@ -193,3 +193,9 @@ kSwitchContext:
 	KLOADCONTEXT
 	iretq
 
+; 프로세서를 쉬게 함
+; PARAM: 없음
+kHlt:
+	hlt		; 프로세서를 대기 상태로 진입시킴
+	hlt
+	ret

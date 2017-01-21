@@ -1,6 +1,7 @@
 #include <stdarg.h>
 #include "Console.h"
 #include "Keyboard.h"
+#include "Task.h"
 
 // 콘솔의 정보를 관리하는 자료구조
 CONSOLEMANAGER gs_stConsoleManager = { 0, };
@@ -152,7 +153,8 @@ BYTE kGetCh(void)
 		// 키 큐에 데이터가 수신될 때까지 대기
 		while(kGetKeyFromKeyQueue(&stData) == FALSE)
 		{
-			;
+			// 키를 대기하는 동안 프로세서를 다른 태스크에 양보하여 프로세서 사용률을 낮춤
+			kSchedule();
 		}
 
 		// 키가 눌렸다는 데이터가 수신되면 ASCII 코드를 반환
