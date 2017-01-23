@@ -11,6 +11,9 @@
 #define FALSE	0
 #define NULL	0
 
+// stddef.h 헤더에 포함된 offsetof() 매크로의 내용
+#define offsetof(TYPE, MEMBER)	__builtin_offsetof(TYPE, MEMBER)
+
 #pragma pack(push, 1) // 구조체 크기 정렬 관련 지시어(Directive), 구조체의 크기를 1바이트로 정렬하여 추가적인 메모리 공한 할당을 안하게 함
 
 // 비디오 모드 중 텍스트 모드 화면을 구성하는 자료구조
