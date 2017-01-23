@@ -27,7 +27,8 @@ SHELLCOMMANDENTRY gs_vstCommandTable[] =
 		{ "killtask", "End Task, ex)killtask 1(ID) or 0xffffffff(All Task)", kKillTask },
 		{ "cpuload", "Show Processor Load", kCPULoad },
 		{ "testmutex", "Test Mutex Function", kTestMutex },
-		{ "testthread", "Test Thread And Process Function", kTestThread }
+		{ "testthread", "Test Thread And Process Function", kTestThread },
+        { "showmatrix", "Show Matrix Screen", kShowMatrix }
 };
 
 // 실제 셸을 구성하는 코드
@@ -761,4 +762,94 @@ static void kTestThread(const char* pcParameterBuffer)
    {
        kPrintf("Process Create Fail\n");
    }
+}
+
+// 난수를 발생시키기 위한 변수
+static volatile QWORD gs_qwRandomValue = 0;
+
+// 임의의 난수를 반환
+QWORD kRandom(void)
+{
+    gs_qwRandomValue = (gs_qwRandomValue * 412153 + 5571031) >> 16;
+    return gs_qwRandomValue;
+}
+
+// 철자를 흘러내리게 하는 스레드
+static void kDropCharactorThread(void)
+{
+    int iX, iY;
+    int i;
+    char vcText[2] = { 0, };
+
+    iX = kRandom() % CONSOLE_WIDTH;
+
+    while(1)
+    {
+        // 잠시 대기함
+        kSleep(kRandom() % 20);
+
+        if((kRandom() % 20) < 16)
+        {
+            vcText[0] = ' ';
+            for(i = 0; i < CONSOLE_HEIGHT - 1; i++)
+            {
+                kPrintStringXY(iX, i , vcText);
+                kSleep(50);
+            }
+        }
+        else
+        {
+            for(i = 0; i < CONSOLE_HEIGHT - 1; i++)
+            {
+                vcText[0] = i + kRandom();
+                kPrintStringXY(iX, i, vcText);
+                kSleep(50);
+            }
+        }
+    }
+}
+
+// 스레드를 생성하여 매트릭스 화면처럼 보여주는 프로세스
+static void kMatrixProcess(void)
+{
+    int i;
+
+    for(i = 0; i < 300; i++)
+    {
+        if(kCreateTask(TASK_FLAGS_THREAD | TASK_FLAGS_LOW, 0, 0,
+                         (QWORD)kDropCharactorThread) == NULL)
+        {
+            break;
+        }
+
+        kSleep(kRandom() % 5 + 5);
+    }
+
+    kPrintf("%d Thread is created\n", i);
+
+    // 키가 입력되면 프로세스 종료
+    kGetCh();
+}
+
+// 매트릭스 화면을 보여줌
+static void kShowMatrix(const char* pcParameterBuffer)
+{
+	TCB* pstProcess;
+
+    pstProcess = kCreateTask(TASK_FLAGS_PROCESS | TASK_FLAGS_LOW, (void*) 0xE00000, 0xE00000,
+                              (QWORD)kMatrixProcess);
+    if(pstProcess != NULL)
+    {
+        kPrintf("Matrix Process [0x%Q] Create Success\n");
+
+        // 태스크가 종료 될 때까지 대기
+        while((pstProcess->stLink.qwID >> 32) != 0)
+        {
+            kSleep(100);
+        }
+    }
+    else
+    {
+        kPrintf("Matrix Process Create Fail\n");
+    }
 }
