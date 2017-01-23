@@ -213,10 +213,6 @@ void kInitializeScheduler(void)
     pstTask->pvStackAddress = (void*)0x600000;
     pstTask->qwStackSize = 0x100000;
 
-    // TCB를 할당 받아 실행 중인 태스크로 설정하여, 부팅을 수행한 태스크를 저장할 TCB를 준비
-    gs_stScheduler.pstRunningTask = kAllocateTCB();
-    gs_stScheduler.pstRunningTask->qwFlags = TASK_FLAGS_HIGHEST;
-
     // 프로세서 사용률을 계산하는데 사용하는 자료구조 초기화
     gs_stScheduler.qwSpendProcessorTimeInIdleTask = 0;
     gs_stScheduler.qwProcessorLoad = 0;
