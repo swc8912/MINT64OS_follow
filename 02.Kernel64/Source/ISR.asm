@@ -3,7 +3,7 @@
 SECTION .text
 
 extern kCommonExceptionHandler, kCommonInterruptHandler, kKeyboardHandler
-extern kTimerHandler, kDeviceNotAvailableHandler
+extern kTimerHandler, kDeviceNotAvailableHandler, kHDDHandler
 
 ; 예외(Exception) 처리를 위한 ISR
 global kISRDivideError, kISRDebug, kISRNMI, kISRBreakPoint, kISROverflow
@@ -486,7 +486,7 @@ kISRHDD1:
 
     ; 핸들러에 인터럽트 번호를 삽입하고 핸들러 호출
     mov rdi, 46
-    call kCommonInterruptHandler
+    call kHDDHandler
 
     KLOADCONTEXT    ; 콘텍스트를 복원
     iretq           ; 인터럽트 처리를 완료하고 이전에 수행하던 코드로 복원
@@ -497,7 +497,7 @@ kISRHDD2:
 
     ; 핸들러에 인터럽트 번호를 삽입하고 핸들러 호출
     mov rdi, 47
-    call kCommonInterruptHandler
+    call kHDDHandler
 
     KLOADCONTEXT    ; 콘텍스트를 복원
     iretq           ; 인터럽트 처리를 완료하고 이전에 수행하던 코드로 복원
